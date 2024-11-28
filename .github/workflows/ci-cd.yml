@@ -59,9 +59,9 @@ jobs:
         uses: docker/setup-buildx-action@v2
 
       - name: Authenticate to DockerHub
-        run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login --username ${{ secrets.DOCKER_USERNAME }} --password-stdin
+        run: echo ${{ secrets.DOCKER_TOKEN }} | docker login --username ${{ secrets.DOCKER_USERNAME }} --password-stdin
 
-#      - name: Create Kubernetes Docker registry secret
+      #      - name: Create Kubernetes Docker registry secret
 #        run: |
 #          kubectl create secret docker-registry my-dockerhub-secret \
 #            --docker-server=https://index.docker.io/v1/ \
