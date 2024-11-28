@@ -38,8 +38,10 @@ jobs:
       - name: Build Docker Image
         run: |
           docker build -t sawnjordan/java-task-demo:${{ github.sha }} .
-          docker tag sawnjordan/java-task-demo:${{ github.sha }} sawnjordan/java-task-demo:latest
+#          docker tag sawnjordan/java-task-demo:${{ github.sha }} sawnjordan/java-task-demo:latest
 
+      - name: List Docker Image
+        run: docker images
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -74,7 +76,7 @@ jobs:
           if [ "${{ github.ref }}" == "refs/heads/main" ]; then
             docker push sawnjordan/java-task-demo:${{ github.sha }}
           else
-            docker push sawnjordan/java-task-demo:dev
+            docker push sawnjordan/java-task-demo:${{ github.sha }}
           fi
 
 #      - name: Set up Helm
