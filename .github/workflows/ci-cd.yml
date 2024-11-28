@@ -70,7 +70,9 @@ jobs:
 #            --docker-username=${{ secrets.DOCKER_USERNAME }} \
 #            --docker-password=${{ secrets.DOCKER_TOKEN }} \
 #            --dry-run=client -o yaml | kubectl apply -f -
-
+      - name: List Docker Image
+        run: docker images
+        
       - name: Push Docker image to Docker Hub
         run: |
           if [ "${{ github.ref }}" == "refs/heads/main" ]; then
