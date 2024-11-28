@@ -48,6 +48,8 @@ jobs:
       - name: Push Docker image to Docker Hub
         run: |
           docker login --username ${{ secrets.DOCKER_USERNAME }} --password-stdin <<< "${{ secrets.DOCKER_TOKEN }}"
+          SHORT_SHA=${{ github.sha }}
+          SHORT_SHA=${SHORT_SHA:0:7}
           docker push sawnjordan/java-task-demo:$SHORT_SHA
 
 #  deploy:
