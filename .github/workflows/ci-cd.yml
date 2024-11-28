@@ -38,7 +38,6 @@ jobs:
       - name: Build Docker Image
         run: |
           docker build -t sawnjordan/java-task-demo:${{ github.sha }} .
-#          docker tag sawnjordan/java-task-demo:${{ github.sha }} sawnjordan/java-task-demo:latest
 
       - name: Push Docker image to Docker Hub
         run: |
