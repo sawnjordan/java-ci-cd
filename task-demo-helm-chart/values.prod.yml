@@ -1,0 +1,26 @@
+replicaCount: 5
+
+image:
+  tag: "prod"
+
+service:
+  name: task-demo-prod
+
+ingress:
+  enabled: false
+  hosts:
+    - host: task-demo-prod.mycompany.com
+      paths:
+        - /
+  tls:
+    - hosts:
+        - task-demo-prod.mycompany.com
+      secretName: task-demo-prod-tls
+
+resources:
+  requests:
+    memory: "512Mi"
+    cpu: "1"
+  limits:
+    memory: "1Gi"
+    cpu: "2"

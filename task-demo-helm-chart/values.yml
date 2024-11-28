@@ -1,0 +1,22 @@
+replicaCount: 2 # Default value for dev
+
+image:
+  repository: my-dockerhub-repo/task-demo
+  pullPolicy: Always
+  tag: "latest"  # Default image tag
+
+service:
+  name: task-demo
+  type: ClusterIP
+  port: 8080
+
+ingress:
+  enabled: false
+  annotations: {}
+  hosts:
+    - host: task-demo.local
+      paths:
+        - /
+  tls: []
+
+resources: {}

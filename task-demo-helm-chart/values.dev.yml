@@ -1,0 +1,23 @@
+replicaCount: 2
+
+image:
+  tag: "dev"
+
+service:
+  name: task-demo-dev
+
+ingress:
+  enabled: false
+  hosts:
+    - host: task-demo-dev.local
+      paths:
+        - /
+  tls: []
+
+resources:
+  requests:
+    memory: "256Mi"
+    cpu: "500m"
+  limits:
+    memory: "512Mi"
+    cpu: "1"
