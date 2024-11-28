@@ -10,6 +10,13 @@ service:
   type: ClusterIP
   port: 8080
 
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 75
+
 ingress:
   enabled: false
   annotations: {}
@@ -19,4 +26,10 @@ ingress:
         - /
   tls: []
 
-resources: {}
+resources:
+  requests:
+    memory: "256Mi"
+    cpu: "500m"
+  limits:
+    memory: "512Mi"
+    cpu: "1"

@@ -1,36 +1,47 @@
-variable "region" {
-  description = "AWS region"
-  default     = "us-west-2"
+variable "kubernetes_version" {
+  default     = 1.30
+  description = "kubernetes version"
 }
-
-variable "environment" {
-  description = "Environment (e.g., dev, prod)"
-  default     = "dev"
+variable "cluster_name" {
+  default     = "dev-eks-cluster"
+  description = "Cluster name"
 }
-
-variable "vpc_cidr_block" {
-  description = "CIDR block for the VPC"
+locals {
+  name = "dev-eks-cluster"
+  tags = {
+    Example = local.name
+  }
+}
+variable "vpc_cidr" {
   default     = "10.0.0.0/16"
+  description = "default CIDR range of the VPC"
 }
-
-variable "public_subnets" {
-  description = "List of public subnet CIDR blocks"
-  type        = list(string)
-  default     = ["10.0.1.0/24", "10.0.2.0/24"]
+variable "aws_region" {
+  default     = "ap-south-1"
+  description = "aws region"
 }
-
+variable "azs" {
+  default     = ["aps1-az1", "aps1-az2"]
+  description = "aws azs"
+}
 variable "private_subnets" {
-  description = "List of private subnet CIDR blocks"
-  type        = list(string)
-  default     = ["10.0.3.0/24", "10.0.4.0/24"]
+  default     = ["10.0.1.0/24", "10.0.2.0/24"]
+  description = "Private Subnets"
+}
+variable "public_subnets" {
+  default     = ["10.0.4.0/24", "10.0.5.0/24"]
+  description = "Public Subnets"
+}
+variable "intra_subnets" {
+  default     = ["10.0.6.0/24", "10.0.7.0/24"]
+  description = "Intra Subnets"
+}
+variable "instance_types" {
+  default     = ["t3.medium"]
+  description = "Cluster node instance types"
+}
+variable "environment" {
+  default     = "dev"
+  description = "Cluster environment"
 }
 
-variable "cluster_version" {
-  description = "Kubernetes version for the EKS cluster"
-  default     = "1.24"
-}
-
-variable "key_name" {
-  description = "SSH key pair name for EC2 instances"
-  default     = "your-ssh-key"
-}
