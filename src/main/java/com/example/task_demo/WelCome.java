@@ -6,6 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class WelCome {
     @RequestMapping("/welcome")
     public String hello() {
-        return "WelCome to Java CI/CD.";
+        return "WelCome to Java CI/CD. My name is Sanjog Gomden.";
     }
 }
