@@ -1,0 +1,52 @@
+replicaCount: 2 # Default value for dev
+
+image:
+  repository: sawnjordan/java-task-demo
+  pullPolicy: Always
+  tag: "02c58f7"
+
+service:
+  name: task-demo
+  type: ClusterIP
+  port: 8080
+
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 75
+
+ingress:
+  enabled: false
+  annotations: {}
+  hosts:
+    - host: task-demo.local
+      paths:
+        - /
+  tls: []
+
+resources:
+  requests:
+    memory: "256Mi"
+    cpu: "500m"
+  limits:
+    memory: "512Mi"
+    cpu: "1"
+
+storageClass:
+  name: ebs-sc
+  provisioner: "ebs.csi.aws.com"
+  parameters:
+    type: gp3
+    fsType: ext4
+  volumeBindingMode: WaitForFirstConsumer
+
+persistentVolumeClaim:
+  name: ebs-pvc
+  accessMode: ReadWriteOnce
+  storage: 5Gi
+
+app:
+  container:
+    mountPath: /app

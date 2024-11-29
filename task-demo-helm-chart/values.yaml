@@ -1,9 +1,9 @@
-replicaCount: 2 # Default value for dev
+replicaCount: 2
 
 image:
-  repository: my-dockerhub-repo/task-demo
+  repository: sawnjordan/java-task-demo
   pullPolicy: Always
-  tag: "latest"  # Default image tag
+  tag: "02c58f7"
 
 service:
   name: task-demo
@@ -13,7 +13,7 @@ service:
 autoscaling:
   enabled: true
   minReplicas: 2
-  maxReplicas: 10
+  maxReplicas: 5
   targetCPUUtilizationPercentage: 80
   targetMemoryUtilizationPercentage: 75
 
@@ -33,3 +33,20 @@ resources:
   limits:
     memory: "512Mi"
     cpu: "1"
+
+storageClass:
+  name: ebs-sc
+  provisioner: "ebs.csi.aws.com"
+  parameters:
+    type: gp3
+    fsType: ext4
+  volumeBindingMode: WaitForFirstConsumer
+
+persistentVolumeClaim:
+  name: ebs-pvc
+  accessMode: ReadWriteOnce
+  storage: 5Gi
+
+app:
+  container:
+    mountPath: /app
