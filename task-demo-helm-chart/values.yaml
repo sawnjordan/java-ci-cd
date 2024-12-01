@@ -47,6 +47,16 @@ persistentVolumeClaim:
   accessMode: ReadWriteOnce
   storage: 5Gi
 
+livenessProbe:
+  path: /welcome
+  initialDelaySeconds: 5
+  periodSeconds: 15
+
+readinessProbe:
+  path: /welcome
+  initialDelaySeconds: 5
+  periodSeconds: 10
+
 app:
   container:
     mountPath: /app
